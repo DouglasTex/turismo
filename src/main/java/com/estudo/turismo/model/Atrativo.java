@@ -20,7 +20,6 @@ public class Atrativo {
 	private String nome, cidade, estado, tipo;
 	
 	private float latitude, longitude;
-	
 
 	@Lob //indica que a variável será um formato de texto grande
 	private String descricao;

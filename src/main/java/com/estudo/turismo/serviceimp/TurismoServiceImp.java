@@ -39,5 +39,10 @@ public class TurismoServiceImp implements TurismoService {
 		turismoRepository.delete(atrativo);
 	}
 
+	@Override
+	public List<Atrativo> findByNome(String nome) {
+		return turismoRepository.findByNome(nome);
+	}
+
 	
 }
