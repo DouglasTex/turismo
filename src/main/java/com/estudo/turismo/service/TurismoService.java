@@ -11,5 +11,6 @@ public interface TurismoService {
 	Atrativo save(Atrativo atrativo);
 	List<Atrativo> findByTipo(String tipo);
 	void delete(Atrativo atrativo);
+	List<Atrativo> findByNome(String nome);
 
 }

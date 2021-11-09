@@ -25,14 +25,13 @@ import com.estudo.turismo.service.TurismoService;
 public class TurismoController {
 	
 	@Autowired
-	private TurismoRepository turismoRepository;
-	@Autowired
 	private TurismoService turismoService;
 	
 	@RequestMapping(value = "/atrativos", method = RequestMethod.GET)
 	public ModelAndView getAtrativos() {
 		ModelAndView mv = new ModelAndView("atrativos");
 		List<Atrativo> atrativos = turismoService.findAll();
+		
 		mv.addObject("atrativos", atrativos);
 		return mv;
 	}
@@ -45,6 +44,22 @@ public class TurismoController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/atrativos/tipo/{tipo}", method = RequestMethod.GET)
+	public ModelAndView getAtrativosPorTipo(@PathVariable("tipo") String tipo) {
+		ModelAndView mv = new ModelAndView("atrativos");
+		List<Atrativo> atrativos = turismoService.findByTipo(tipo);
+		mv.addObject("atrativos", atrativos);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/atrativos/nome/{nome}", method = RequestMethod.GET)
+	public ModelAndView getAtrativosPorNome(@PathVariable("nome") String nome) {
+		ModelAndView mv = new ModelAndView("atrativos");
+		List<Atrativo> atrativos = turismoService.findByNome(nome);
+		mv.addObject("atrativos", atrativos);
+		return mv;
+	}
+
 	@RequestMapping(value = "/newatrativo", method = RequestMethod.GET)
 	public String getAtrativoForm() {
 		return "atrativoForm";
@@ -61,9 +76,7 @@ public class TurismoController {
 		return "redirect:/turismo/atrativos";
 	}
 	
-
-	
-	@GetMapping("/atrativoEdit")
+	@GetMapping(value = "/atrativoEdit")
 	public ModelAndView editAtrativo(@RequestParam long id) {
 		ModelAndView mv = new ModelAndView("atrativoEdit");
 		
@@ -71,6 +84,14 @@ public class TurismoController {
 		mv.addObject("atrativo", atrativo);
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "/atrativoEdit", method = RequestMethod.POST)
+	public String saveAtrativo(@ModelAttribute Atrativo atrativo) {
+		
+		turismoService.save(atrativo);
+		
+		return "redirect:/turismo/atrativos";
 	}
 	
 	@GetMapping("/removeAtrativo")
@@ -82,15 +103,9 @@ public class TurismoController {
 		return "redirect:/turismo/atrativos";
 	}
 	
-	@GetMapping("/saveAtrativo")
-	public String saveAtrativo(@ModelAttribute Atrativo atrativo) {
-		
-		turismoService.save(atrativo);
-		
-		return "redirect:/turismo/atrativos";
-	}
-	
-	
+
+	/*
+	/*
 	@PostMapping(path="/add")
 	public @ResponseBody String addNewUser (
 		@RequestParam String nome, @RequestParam String cidade, 
@@ -113,5 +128,6 @@ public class TurismoController {
 	public @ResponseBody Iterable<Atrativo> getAllAtrativos() {
 		return turismoRepository.findAll();
 	}
+	*/
 
 }

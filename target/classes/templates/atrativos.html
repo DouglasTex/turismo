@@ -12,13 +12,23 @@
 		<nav class="navbar navbar-light bg-light">
 		  <div class="container-fluid">
 		    <span class="navbar-brand mb-0 h1">Area do Turista</span>
+		    
+		    	<form action="getAtrativosPorNome" method="POST">
+					<input name="nome">
+					<input class="btn btn-primary" type="submit" value="busca">
+				</form>
+		    
 		    <a class="btn btn-primary" href="/turismo/newatrativo" role="button">Cadastro de Atrativo</a>
 		  </div>
 		</nav>
 	</header>
+	
+	<br>
 
+	<br>
+	
 	<section>
-		<div class="container" style="width: 60%; padding-bottom: 30px;">
+		<div class="container" style="width: fit-content; padding-bottom: 30px;">
 		
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 			  <ol class="breadcrumb">
@@ -26,7 +36,7 @@
 			  </ol>
 			</nav>
 			
-			<div class="card" style="width: 30rem; margin-top: 20px;" th:each="atrativo : ${atrativos}">
+			<div class="card" style="width: 40rem; margin-top: 20px;" th:each="atrativo : ${atrativos}">
 			  <div class="card-body">
 			    <h5 class="card-title"> <span th:text="${atrativo.nome}"></span> </h5>
 			    <h6 class="card-subtitle mb-2 text-muted"> <span th:text="${atrativo.getCidade()}"></span>, <span th:text="${atrativo.getEstado()}"></span> </h6>

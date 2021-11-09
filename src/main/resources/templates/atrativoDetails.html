@@ -31,7 +31,7 @@
 				
 				<p class="card-subtittle mb-2 text-muted">
 					<span th:text="${atrativo.cidade}"></span>, <span th:text="${atrativo.estado}"></span>
-					 | <a href="#" class="link" style="text-align: left;"><span th:text="${atrativo.getTipo()}"></span></a>.
+					 | <a th:href="${(#mvc.url('TC#getAtrativosPorTipo').arg(0, atrativo.getTipo())).build()}" class="link" style="text-align: left;"><span th:text="${atrativo.getTipo()}"></span></a>.
 				</p>
 				
 				<section>
